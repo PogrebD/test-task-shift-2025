@@ -2,8 +2,8 @@ package com.pogreb.shifttesttask.userlist.presentation.converter
 
 import android.content.Context
 import com.pogreb.shifttesttask.R
-import com.pogreb.shifttesttask.userlist.data.entity.Name
-import com.pogreb.shifttesttask.userlist.data.entity.Street
+import com.pogreb.shifttesttask.shared.entity.Name
+import com.pogreb.shifttesttask.shared.entity.Street
 import com.pogreb.shifttesttask.userlist.domain.entity.UserItem
 import com.pogreb.shifttesttask.userlist.presentation.entity.UserItemViewState
 

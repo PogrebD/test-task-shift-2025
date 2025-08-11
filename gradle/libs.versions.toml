@@ -17,6 +17,7 @@ hilt = "2.56.2"
 ksp = "2.2.0-2.0.2"
 kotlinxSerializationJson = "1.9.0"
 hiltAndroidCompiler = "2.56.2"
+roomVersion = "2.7.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -46,6 +47,10 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 glide-compose = { module = "com.github.bumptech.glide:compose", version = "1.0.0-beta01" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+androidx-room-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

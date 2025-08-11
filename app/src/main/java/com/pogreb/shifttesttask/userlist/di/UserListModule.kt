@@ -2,6 +2,7 @@ package com.pogreb.shifttesttask.userlist.di
 
 import android.content.Context
 import com.pogreb.shifttesttask.userlist.data.UserListApi
+import com.pogreb.shifttesttask.userlist.data.converter.UserEntityConverter
 import com.pogreb.shifttesttask.userlist.data.converter.UserItemConverter
 import com.pogreb.shifttesttask.userlist.data.repository.UserListRepositoryImpl
 import com.pogreb.shifttesttask.userlist.domain.repository.UserListRepository
@@ -31,6 +32,11 @@ interface UserListModule {
         @Provides
         fun provideUserItemViewStateConverter(@ApplicationContext context: Context): UserItemViewStateConverter {
             return UserItemViewStateConverter(context)
+        }
+
+        @Provides
+        fun provideUserEntityConverter(): UserEntityConverter {
+            return UserEntityConverter()
         }
     }
 

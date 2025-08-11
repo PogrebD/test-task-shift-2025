@@ -1,7 +1,7 @@
 package com.pogreb.shifttesttask.userlist.domain.entity
 
-import com.pogreb.shifttesttask.userlist.data.entity.Name
-import com.pogreb.shifttesttask.userlist.data.entity.Street
+import com.pogreb.shifttesttask.shared.entity.Name
+import com.pogreb.shifttesttask.shared.entity.Street
 
 data class UserItem(
     val name: Name,

@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">ShiftTestTask</string>
-    <string name="error_title">Ошибка</string>
-    <string name="error_try_again">Попробовать снова</string>
 
     <string name="full_name_template">%1$s %2$s %3$s</string>
     <string name="address_template">%1$d %2$s</string>
+
+    <string name="error_title">Error</string>
+    <string name="error_try_again">Retry</string>
+    <string name="user_list_title">User list</string>
+
 
 </resources>

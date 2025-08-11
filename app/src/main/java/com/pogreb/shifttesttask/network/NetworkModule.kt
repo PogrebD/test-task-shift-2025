@@ -22,16 +22,13 @@ private const val READ_TIMEOUT = 10L
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-
     private val converterFactory = Json {
         ignoreUnknownKeys = true
     }.asConverterFactory("application/json".toMediaType())
 
-
     private val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor)

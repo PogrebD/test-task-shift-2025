@@ -7,9 +7,19 @@ import com.pogreb.shifttesttask.userlist.domain.repository.UserListRepository
 import javax.inject.Inject
 
 class UserListRepositoryImpl @Inject constructor(
-    private val api: UserListApi,
     private val converter: UserItemConverter,
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
 ) : UserListRepository {
-    override suspend fun getUsers(): List<UserItem> =
-        api.getUsers().results.map { converter.convert(it) }
+    override suspend fun getUsers(): List<UserItem> {
+        val cached = localDataSource.getData().firstOrNull()
+        if (cached == null) {
+            val remoteData = remoteDataSource.getNumUsers()
+            localDataSource.saveData(remoteData)
+        }
+
+        return localDataSource.getData().map { converter.convert(it) }
+    }
+
+
 }

@@ -9,7 +9,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.pogreb.shifttesttask.R
 import com.pogreb.shifttesttask.userlist.presentation.UserListViewModel
 import com.pogreb.shifttesttask.userlist.ui.UserListScreen
 
@@ -21,7 +23,7 @@ fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Список пользователей") }
+                title = { Text(stringResource(R.string.user_list_title)) }
             )
         },
         content =

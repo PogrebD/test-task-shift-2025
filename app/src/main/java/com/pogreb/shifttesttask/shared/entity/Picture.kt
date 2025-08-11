@@ -1,4 +1,4 @@
-package com.pogreb.shifttesttask.userlist.data.entity
+package com.pogreb.shifttesttask.shared.entity
 
 import kotlinx.serialization.Serializable
 

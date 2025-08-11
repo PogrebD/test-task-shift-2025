@@ -6,6 +6,7 @@ import com.pogreb.shifttesttask.shared.di.BaseUrl
 import com.pogreb.shifttesttask.userlist.domain.usecase.GetUsersUseCase
 import com.pogreb.shifttesttask.userlist.presentation.converter.UserItemViewStateConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +25,7 @@ class UserListViewModel @Inject constructor(
     fun loadData() {
         _state.value = UserListState.Loading
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val userList = getUsersUseCase.invoke()
                 _state.value = UserListState.Idle(
