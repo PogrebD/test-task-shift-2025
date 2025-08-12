@@ -18,6 +18,7 @@ fun UserListScreen(
     onItemClick: (String) -> Unit,
 ) {
     val state by userListViewModel.state.collectAsState()
+    val isRefreshing by userListViewModel.isRefreshing.collectAsState()
 
     LaunchedEffect(Unit) {
         userListViewModel.loadData()
@@ -31,7 +32,12 @@ fun UserListScreen(
             UserListState.Loading -> FullScreenProgressIndicator()
 
             is UserListState.Idle ->
-                UserListContent(currentState, onItemClick)
+                UserListContent(
+                    state = currentState,
+                    onItemClick = onItemClick,
+                    isRefreshing = isRefreshing,
+                    onRefresh = userListViewModel::refreshData
+                )
 
             is UserListState.Error -> ErrorMassage(
                 message = currentState.reason,

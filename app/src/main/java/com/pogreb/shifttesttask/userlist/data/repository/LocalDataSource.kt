@@ -19,4 +19,8 @@ class LocalDataSource @Inject constructor(
         val entities = data.map { converter.convert(it) }
         dao.insert(entities)
     }
+
+    suspend fun delete() {
+        dao.delete()
+    }
 }

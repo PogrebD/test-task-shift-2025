@@ -14,7 +14,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SwipeToDismissBoxState
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,23 +33,31 @@ import com.pogreb.shifttesttask.R
 import com.pogreb.shifttesttask.userlist.presentation.UserListState
 import com.pogreb.shifttesttask.userlist.presentation.entity.UserItemViewState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserListContent(
     state: UserListState.Idle,
     onItemClick: (String) -> Unit,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxHeight()
-
+    PullToRefreshBox(
+        isRefreshing = isRefreshing,
+        onRefresh = onRefresh,
     ) {
-        items(state.users) { item ->
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxHeight()
 
-            UserListItem(
-                item = item,
-                onItemClick = onItemClick,
-            )
+        ) {
+            items(state.users) { item ->
 
+                UserListItem(
+                    item = item,
+                    onItemClick = onItemClick,
+                )
+
+            }
         }
     }
 }
@@ -68,7 +79,7 @@ fun UserListItem(
         ) {
         Row(
             modifier = Modifier
-                .padding(all =  8.dp)
+                .padding(all = 8.dp)
         ) {
             UserPic(item.picture)
 

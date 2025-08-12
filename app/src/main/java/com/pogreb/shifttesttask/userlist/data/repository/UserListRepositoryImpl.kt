@@ -19,4 +19,13 @@ class UserListRepositoryImpl @Inject constructor(
 
         return localDataSource.getData().map { converter.convert(it) }
     }
+
+    override suspend fun refreshUsers(): List<UserItem> {
+        val remoteData = remoteDataSource.getNumUsers()
+
+        localDataSource.delete()
+        localDataSource.saveData(remoteData)
+
+        return localDataSource.getData().map { converter.convert(it) }
+    }
 }
