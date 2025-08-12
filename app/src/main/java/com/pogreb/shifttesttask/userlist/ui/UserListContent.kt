@@ -1,6 +1,7 @@
 package com.pogreb.shifttesttask.userlist.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -26,15 +27,13 @@ import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.pogreb.shifttesttask.R
-import com.pogreb.shifttesttask.shared.di.BaseUrl
 import com.pogreb.shifttesttask.userlist.presentation.UserListState
 import com.pogreb.shifttesttask.userlist.presentation.entity.UserItemViewState
 
 @Composable
 fun UserListContent(
     state: UserListState.Idle,
-    onItemClick: (Long) -> Unit,
-    @BaseUrl baseUrl: String,
+    onItemClick: (String) -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -46,7 +45,6 @@ fun UserListContent(
             UserListItem(
                 item = item,
                 onItemClick = onItemClick,
-                baseUrl = baseUrl,
             )
 
         }
@@ -57,100 +55,94 @@ fun UserListContent(
 @Composable
 fun UserListItem(
     item: UserItemViewState,
-    onItemClick: (Long) -> Unit,
-    @BaseUrl baseUrl: String,
+    onItemClick: (String) -> Unit,
 ) {
     ElevatedCard(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
         ),
-        modifier = Modifier.padding(vertical = 1.dp)
-        //.clickable { onItemClick(item.id) },
+        modifier = Modifier
+            .padding(vertical = 1.dp)
+            .clickable { onItemClick(item.id) },
 
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
         ) {
-            Row(
+        Row(
+            modifier = Modifier
+                .padding(all =  8.dp)
+        ) {
+            UserPic(item.picture)
+
+            Column(
                 modifier = Modifier
-                    .padding(vertical = 8.dp)
+                    .fillMaxWidth()
+                    .padding(horizontal = 8.dp)
             ) {
-                GlideImage(
-                    model = item.picture,
-                    contentDescription = "User image",
-                    modifier = Modifier
-                        .height(70.dp)
-                        .width(70.dp)
-                        .clip(CircleShape),
-                    contentScale = ContentScale.Crop,
-                ) {
-                    it
-                        .placeholder(R.drawable.placeholder)
-                        .error(R.drawable.error_image)
-                }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp)
-                ) {
-                    Text(
-                        modifier = Modifier.padding(start = 4.dp),
-                        text = item.name,
-                        fontSize = 16.sp,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Row {
-                        Image(
-                            painter = painterResource(R.drawable.baseline_home_24),
-                            contentDescription = null,
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 4.dp),
-                            text = item.address,
-                            fontSize = 14.sp,
-                            color = Color.Gray,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
+                Text(
+                    modifier = Modifier.padding(start = 4.dp),
+                    text = item.name,
+                    fontSize = 16.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
 
+                AddressText(item.address)
 
-                    Row {
-                        Image(
-                            painter = painterResource(R.drawable.baseline_phone_24),
-                            contentDescription = null,
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 4.dp),
-                            text = item.phone,
-                            fontSize = 14.sp,
-                            color = Color.Gray,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis,
-                        )
-                    }
-                }
+                PhoneText(item.phone)
             }
         }
     }
 }
 
-/*
-@Preview(showBackground = true, device = Devices.PIXEL_4)
 @Composable
-fun UserListItemPreview() {
-    MaterialTheme {
-        UserListItem(
-            item = UserItemViewState(
-                name = "Miss Jennie Nichols",
-                address = "8929 Valwood Pkwy",
-                phone = "(272) 790-0888",
-                picture = "https://randomuser.me/api/portraits/med/men/1.jpg"
-            ),
-            onItemClick = {},
-            baseUrl = ""
+fun PhoneText(phone: String) {
+    Row {
+        Image(
+            painter = painterResource(R.drawable.baseline_phone_24),
+            contentDescription = null,
+        )
+        Text(
+            modifier = Modifier.padding(start = 4.dp),
+            text = phone,
+            fontSize = 14.sp,
+            color = Color.Gray,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
     }
-}*/
+}
+
+@Composable
+fun AddressText(address: String) {
+    Row {
+        Image(
+            painter = painterResource(R.drawable.baseline_home_24),
+            contentDescription = null,
+        )
+        Text(
+            modifier = Modifier.padding(start = 4.dp),
+            text = address,
+            fontSize = 14.sp,
+            color = Color.Gray,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+@OptIn(ExperimentalGlideComposeApi::class)
+@Composable
+fun UserPic(picture: String) {
+    GlideImage(
+        model = picture,
+        contentDescription = "User image",
+        modifier = Modifier
+            .height(70.dp)
+            .width(70.dp)
+            .clip(CircleShape),
+        contentScale = ContentScale.Crop,
+    ) {
+        it
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.error_image)
+    }
+}

@@ -1,4 +1,4 @@
-package com.pogreb.shifttesttask.userlist.ui
+package com.pogreb.shifttesttask.userinfo.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,18 +9,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.pogreb.shifttesttask.shared.ui.ErrorMassage
 import com.pogreb.shifttesttask.shared.ui.FullScreenProgressIndicator
-import com.pogreb.shifttesttask.userlist.presentation.UserListState
-import com.pogreb.shifttesttask.userlist.presentation.UserListViewModel
+import com.pogreb.shifttesttask.userinfo.presentation.UserInfoState
+import com.pogreb.shifttesttask.userinfo.presentation.UserInfoViewModel
 
 @Composable
-fun UserListScreen(
-    userListViewModel: UserListViewModel,
-    onItemClick: (String) -> Unit,
+fun UserInfoScreen(
+    userInfoViewModel: UserInfoViewModel,
 ) {
-    val state by userListViewModel.state.collectAsState()
+    val state by userInfoViewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        userListViewModel.loadData()
+        userInfoViewModel.loadUserInfo()
     }
 
     Column(
@@ -28,14 +27,14 @@ fun UserListScreen(
             .fillMaxSize()
     ) {
         when (val currentState = state) {
-            UserListState.Loading -> FullScreenProgressIndicator()
+            UserInfoState.Loading -> FullScreenProgressIndicator()
 
-            is UserListState.Idle ->
-                UserListContent(currentState, onItemClick)
+            is UserInfoState.Idle ->
+                UserInfoContent(currentState.userInfo)
 
-            is UserListState.Error -> ErrorMassage(
+            is UserInfoState.Error -> ErrorMassage(
                 message = currentState.reason,
-                onRetry = userListViewModel::loadData
+                onRetry = userInfoViewModel::loadUserInfo
             )
         }
     }

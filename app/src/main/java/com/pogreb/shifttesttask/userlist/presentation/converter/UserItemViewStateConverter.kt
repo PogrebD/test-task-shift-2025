@@ -10,6 +10,7 @@ import com.pogreb.shifttesttask.userlist.presentation.entity.UserItemViewState
 class UserItemViewStateConverter(private val context: Context) {
     fun convert(item: UserItem): UserItemViewState =
         UserItemViewState(
+            id = item.id,
             name = formatName(item.name, context),
             picture = item.picture,
             address = formatAddress(item.address, context),

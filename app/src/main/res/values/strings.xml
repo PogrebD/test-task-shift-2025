@@ -3,10 +3,28 @@
 
     <string name="full_name_template">%1$s %2$s %3$s</string>
     <string name="address_template">%1$d %2$s</string>
+    <string name="coordinates_template">%1$s %2$s</string>
+
+    <string name="date_format">dd.MM.yyyy</string>
 
     <string name="error_title">Error</string>
     <string name="error_try_again">Retry</string>
     <string name="user_list_title">User list</string>
+    <string name="user_info_title">User info</string>
 
+    <string name="label_gender">Gender</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="label_address">Address</string>
+    <string name="label_city">City</string>
+    <string name="label_state">State</string>
+    <string name="label_country">Country</string>
+    <string name="label_coordinates">Coordinates</string>
+    <string name="label_email">Email</string>
+    <string name="label_username">Username</string>
+    <string name="label_dob">Date of Birth</string>
+    <string name="label_registered">Registered Date</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_nationality">Nationality</string>
+    <string name="not_available">N/A</string>
 
 </resources>

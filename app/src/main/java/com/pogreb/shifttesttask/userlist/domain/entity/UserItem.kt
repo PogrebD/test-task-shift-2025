@@ -4,6 +4,7 @@ import com.pogreb.shifttesttask.shared.entity.Name
 import com.pogreb.shifttesttask.shared.entity.Street
 
 data class UserItem(
+    val id: String,
     val name: Name,
     val picture: String,
     val address: Street,

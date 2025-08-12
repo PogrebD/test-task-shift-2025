@@ -2,7 +2,6 @@ package com.pogreb.shifttesttask.userlist.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pogreb.shifttesttask.shared.di.BaseUrl
 import com.pogreb.shifttesttask.userlist.domain.usecase.GetUsersUseCase
 import com.pogreb.shifttesttask.userlist.presentation.converter.UserItemViewStateConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +16,6 @@ import javax.inject.Inject
 class UserListViewModel @Inject constructor(
     private val getUsersUseCase: GetUsersUseCase,
     private val converter: UserItemViewStateConverter,
-    @BaseUrl val baseUrl: String,
 ) : ViewModel() {
     private val _state = MutableStateFlow<UserListState>(UserListState.Loading)
     val state: StateFlow<UserListState> = _state.asStateFlow()

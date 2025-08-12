@@ -1,6 +1,5 @@
 package com.pogreb.shifttesttask.userlist.data.repository
 
-import com.pogreb.shifttesttask.userlist.data.UserListApi
 import com.pogreb.shifttesttask.userlist.data.converter.UserItemConverter
 import com.pogreb.shifttesttask.userlist.domain.entity.UserItem
 import com.pogreb.shifttesttask.userlist.domain.repository.UserListRepository
@@ -20,6 +19,4 @@ class UserListRepositoryImpl @Inject constructor(
 
         return localDataSource.getData().map { converter.convert(it) }
     }
-
-
 }
